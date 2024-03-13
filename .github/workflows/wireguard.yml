@@ -18,9 +18,9 @@ jobs:
       - name: Perform Docker Compose action
         run: |
           if [ "${{ github.event.inputs.action }}" == "up" ]; then
-            docker-compose -f pi/wireguard/docker-compose.yml up -d
+            docker compose -f pi/wireguard/docker-compose.yml up -d
           elif [ "${{ github.event.inputs.action }}" == "down" ]; then
-            docker-compose -f pi/wireguard/docker-compose.yml down
+            docker compose -f pi/wireguard/docker-compose.yml down
           else
             echo "Invalid action specified."
             exit 1
