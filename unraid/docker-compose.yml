@@ -19,6 +19,6 @@ services:
       - arr_network
 
 networks:
-  my_network:
+  arr_network:
     driver: bridge
     name: arr_network
