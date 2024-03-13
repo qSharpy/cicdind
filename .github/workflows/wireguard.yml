@@ -14,7 +14,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
+        
+      - name: Set Environment Variables
+        run: echo "WIREGUARD_PASSWORD=${{ secrets.WIREGUARD_PASSWORD }}" >> $GITHUB_ENV
+        
       - name: Perform Docker Compose action
         run: |
           if [ "${{ github.event.inputs.action }}" == "up" ]; then
