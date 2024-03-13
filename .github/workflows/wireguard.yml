@@ -16,7 +16,9 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Set Environment Variables
-        run: echo "WIREGUARD_PASSWORD=${{ secrets.WIREGUARD_PASSWORD }}" >> $GITHUB_ENV
+        run: |
+          echo "WIREGUARD_PASSWORD=${{ secrets.WIREGUARD_PASSWORD }}" >> $GITHUB_ENV
+          echo "PI5_DOCKER_DATA_PATH=${{ vars.PI5_DOCKER_DATA_PATH }}" >> $GITHUB_ENV
         
       - name: Perform Docker Compose action
         run: |
