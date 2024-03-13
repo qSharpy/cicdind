@@ -1,4 +1,4 @@
-name: FractalR5 compose manage
+name: Pi5 wireguard
 
 on:
   workflow_dispatch:
