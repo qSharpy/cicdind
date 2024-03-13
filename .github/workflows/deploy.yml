@@ -1,17 +1,25 @@
-name: Deploy Docker Compose
-
 on:
-  push:
-    branches:
-      - main  # Adjust the branch name if needed
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform (up or down)'
+        required: true
+        default: 'up'
 
 jobs:
-  deploy:
+  manage:
     runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Deploy with Docker Compose
-        run: sudo docker-compose -f unraid/docker-compose.yml up -d
-        # Adjust the path to your docker-compose.yml file accordingly
+      - name: Perform Docker Compose action
+        run: |
+          if [ "${{ github.event.inputs.action }}" == "up" ]; then
+            docker-compose -f unraid/docker-compose.yml up -d
+          elif [ "${{ github.event.inputs.action }}" == "down" ]; then
+            docker-compose -f unraid/docker-compose.yml down
+          else
+            echo "Invalid action specified."
+            exit 1
+          fi
