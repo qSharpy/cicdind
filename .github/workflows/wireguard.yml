@@ -1,0 +1,27 @@
+name: FractalR5 compose manage
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform (up or down)'
+        required: true
+        default: 'up'
+
+jobs:
+  manage:
+    runs-on: pi5-1
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Perform Docker Compose action
+        run: |
+          if [ "${{ github.event.inputs.action }}" == "up" ]; then
+            docker-compose -f pi/wireguard/docker-compose.yml up -d
+          elif [ "${{ github.event.inputs.action }}" == "down" ]; then
+            docker-compose -f pi/wireguard/docker-compose.yml down
+          else
+            echo "Invalid action specified."
+            exit 1
+          fi
