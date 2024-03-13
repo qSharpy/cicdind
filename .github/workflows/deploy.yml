@@ -1,3 +1,5 @@
+name: FractalR5 compose manage
+
 on:
   workflow_dispatch:
     inputs:
