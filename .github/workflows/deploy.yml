@@ -1,0 +1,17 @@
+name: Deploy Docker Compose
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name if needed
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy with Docker Compose
+        run: docker-compose -f unraid/docker-compose.yml up -d
+        # Adjust the path to your docker-compose.yml file accordingly
