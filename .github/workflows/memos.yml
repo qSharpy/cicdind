@@ -1,4 +1,4 @@
-name: Unraid - prometheus grafana
+name: Unraid - memos
 
 on:
   workflow_dispatch:
