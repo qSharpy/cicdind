@@ -1,0 +1,32 @@
+name: Unraid - prometheus grafana
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform (up or down)'
+        required: true
+        default: 'up'
+
+jobs:
+  manage:
+    runs-on: unraid
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: Set Environment Variables
+        run: |
+          echo "GRAFANA_PASSWORD=${{ secrets.GRAFANA_PASSWORD }}" >> $GITHUB_ENV
+          echo "UNRAID_APPDATA_PATH=${{ vars.UNRAID_APPDATA_PATH }}" >> $GITHUB_ENV
+        
+      - name: Perform Docker Compose action
+        run: |
+          if [ "${{ github.event.inputs.action }}" == "up" ]; then
+            docker compose -f prometheus-grafana/docker-compose.yml up -d
+          elif [ "${{ github.event.inputs.action }}" == "down" ]; then
+            docker compose -f prometheus-grafana/docker-compose.yml down
+          else
+            echo "Invalid action specified."
+            exit 1
+          fi
