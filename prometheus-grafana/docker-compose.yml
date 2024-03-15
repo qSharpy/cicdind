@@ -27,7 +27,7 @@ services:
 
   cadvisor:
     image: google/cadvisor:latest
-    container_name: monitoring_cadvisor
+    container_name: cadvisor
     restart: unless-stopped
     volumes:
       - /:/rootfs:ro
