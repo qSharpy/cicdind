@@ -23,6 +23,7 @@ jobs:
       - name: Perform Docker Compose action
         run: |
           if [ "${{ github.event.inputs.action }}" == "up" ]; then
+            chown 65534:65534 ${UNRAID_APPDATA_PATH}/prometheus
             docker compose -f prometheus-grafana/docker-compose.yml up -d
           elif [ "${{ github.event.inputs.action }}" == "down" ]; then
             docker compose -f prometheus-grafana/docker-compose.yml down
