@@ -8,4 +8,4 @@ datasources:
   access: proxy
   editable: true
   jsonData:
-    timeInterval: 5s
+    timeInterval: 1s
